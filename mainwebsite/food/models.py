@@ -3,6 +3,7 @@ from django.db import models
 from chef.models import Chef
 # Create your models here.
 # 530016
+
 class Food(models.Model):
 	TYPE_OF_DIET_CHOICES = (
 		("VG","Vegetarian"),
@@ -26,14 +27,31 @@ class Food(models.Model):
 
 
 	PINCODES = (
-		)
+		('530003', 'Andhra University'),
+		('530003', 'Chinawaltair'),
+		('530004', 'Waltair'),
+		('530016', 'Akkayapalem'),
+		('530016', 'Dwarakanagar'),
+		('530017', 'Isakathota'),
+		('530017', 'L B Colony'),
+		('530017', 'M.V.P COLONY'),
+		('530020', 'Dabagardens'),
+		('530022', 'H B Colony'),
+		('530041', 'Pothinamallayapalem'),
+		('530045', 'Gitam Engg. College'),
+		('530045', 'Sagar Nagar'),
+		('530045', 'Yandada'),
+		('530048', 'Madhurawada'),
+		('531032', 'Venkupalem'))
+
+
 
 
 	name = models.CharField(max_length=255)
 	description = models.TextField()
 	type_of_diet = models.CharField(max_length=3,choices=TYPE_OF_DIET_CHOICES)
 	
-	picture = models.ImageField(upload_to="food_images")
+	picture = models.ImageField(upload_to="food_images/%Y/%m/%d")
 
 	meal_timing = models.CharField(max_length=4,choices = MEAL_CHOICES)
 	time_slot = models.CharField(max_length=30,choices=TIME_SLOT_CHOICES)
@@ -46,6 +64,7 @@ class Food(models.Model):
 
 	quantity = models.IntegerField(default=0)
 
+	hash_tags = models.CharField(max_length=255,null=True,blank=True)
 
 	def __unicode__(self):
 		return self.name

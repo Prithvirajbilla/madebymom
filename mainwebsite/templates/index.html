@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+      <!-- Three columns of text below the carousel -->
+     <div class="container well">
+     	<h1 class="page-header" style="text-align:center">
+     		Items served by our chefs <small> Meals peppered with love </small>
+     	</h1>
+
+     </div>
+    <div class="row">
+	{% for food in foods %}
+	    <div class="span4">
+		    <div class="card">
+			   <div class="card-media">
+			      <a class="card-media-container" href="#">
+			         <img src="{{food.picture.url}}" alt="media"/>
+			      </a>
+			   </div>
+			   <div class="card-body">
+			      <h4>{{ food.name }}
+			      </h4>
+			   </div>
+			   	<div class="card-heading image">
+			      <img src="{{food.served_by.picture.url}}" alt=""/>
+			      <div class="card-heading-header">
+			         <h3>{{food.served_by.name}}</h3>
+			         <span>{{food.hash_tags}}</span>
+			      </div>
+			      <img  style="display:inline-block;width: 25px; height: 25px;margin-top:5px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;" class="pull-right img-resposnive"  alt="64x64"  src="{% static 'img/veg.jpg' %}">
+			   </div>
+
+			   <div class="card-actions">
+			   	  <button class="btn " > Rs. {{food.price}} </button>
+			      <a data-toggle="collapse" data-target="#c{{ forloop.counter0 }}-comments"  class="btn btn-primary" >View details &raquo;</a>
+			      <button class="btn btn-warning">Add to Cart</button>
+			   </div>
+			   <div class="card-comments">
+			      <div id="c{{ forloop.counter0 }}-comments" class="comments collapse">
+			         <div class="media">
+			            <div class="media-body">
+			               <h4 class="media-heading">Description</h4>
+			               <p>{{food.description |safe}}</p>
+			            </div>
+			         </div>
+			      </div>
+			   </div>
+
+			</div>
+		</div>
+		 	{% if forloop.counter|divisibleby:3 %}
+			</div>
+			<div class="row">
+			{% endif %}
+	{% endfor %}
+
+
+	</div>
+
+
+
+{% endblock %}
