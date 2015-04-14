@@ -86,7 +86,6 @@
       top: 0;
       left: 0;
       min-width: 100%;
-      height: 500px;
     }
 
     .carousel-caption {
@@ -244,4 +243,66 @@
 
 {
     text-align: left;
+}
+
+.card
+{
+  padding-top: 0px;
+}
+
+.card .card-media
+{
+/*  background:linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.65)100%)
+*/  padding: 0px;
+  margin: 0px;
+  position: relative;
+  display:inline-block;
+
+}
+.card-media:after
+{
+  content:'';
+  position:absolute;
+  left:0; top:0;
+  width:100%; height:100%;
+  display:inline-block;
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+
+}
+.card .card-comments
+{
+  padding: 0px;
+  padding-left: 20px;
+}
+.card-media .hd-text
+{
+  color: #fff;
+  position: absolute; z-index: 1; left: 4%;
+   bottom: 5px;
+   font-weight: bold;
+
+
+}
+.food-name
+{
+  text-shadow: 1px 1px 1px rgba(0,0,0,1);
+
+}
+
+.card .card-heading
+{
+  padding-top: 20px;
+}
+.card-media img
+{
+  display:block;
+  filter:blur(1px);
+  -webkit-filter:blur(1px);
+
 }
