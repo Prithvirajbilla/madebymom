@@ -8,7 +8,8 @@ import datetime
 
 def home(request):
 	template = "index.html"
-	foods = Food.objects.filter(day=datetime.date.today())
+	# foods = Food.objects.filter(day=datetime.date.today())
+	foods = Food.objects.all()
 	return render(request,template,{"foods":foods})
 
  

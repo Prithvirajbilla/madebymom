@@ -3,15 +3,9 @@
 {% block content %}
 
       <!-- Three columns of text below the carousel -->
-     <div class="container well">
-     	<h1 class="page-header" style="text-align:center">
-     		Items served by our chefs <small> Meals peppered with love </small>
-     	</h1>
-
-     </div>
     <div class="row">
 	{% for food in foods %}
-	    <div class="span4 simpleCart_shelfItem">
+	    <div class="col-md-4 col-lg-4 col-sm-6 col-border-bs">
 		    <div class="card">
 			   <div class="card-media">
 			         <img src="{{food.picture.url}}" alt="media"/>
@@ -31,12 +25,21 @@
 			   <div class="card-actions">
 			   	  <button class="btn item_price" > Rs. {{food.price}} </button>
 			      <a data-toggle="collapse" data-target="#c{{ forloop.counter0 }}-comments"  class="btn btn-primary" >View details &raquo;</a>
-					<div class="input-prepend input-append pull-right" style="margin-bottom:0px;margin-left:10px">
-					  <button class="btn btn-warning" type="button"><i class="icon-minus-sign"></i></button>
-					  <input  value="0"  style="width:20px" type="text">
-					  <button class="btn btn-success" type="button"><i class="icon-plus-sign"></i></button>
-					</div>
 
+
+				<div class="input-group pull-right" style="width:120px">
+			          <span class="input-group-btn">
+			              <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+			                <i class="glyphicon glyphicon-minus"></i>
+			              </button>
+			          </span>
+			          <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
+			          <span class="input-group-btn">
+			              <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+			                  <i class="glyphicon glyphicon-plus"></i>
+			              </button>
+			          </span>
+				</div>
 
 			   </div>
 			   <div class="card-comments">
