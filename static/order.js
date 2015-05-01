@@ -5,6 +5,9 @@ $(".btn-number").click(
 			var id = "#"+$(this).data("id");
 			if(type_of_button == "minus")
 			{
+				if(quant == 10)
+					$(id+" .btn-number[data-type='plus']").removeAttr("disabled");
+				
 				quant -= 1;
 				if(quant < 1)
 				{
@@ -25,6 +28,7 @@ $(".btn-number").click(
 				if(quant > 10)
 				{
 					$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
+					$(this).attr("disabled",true);
 				}
 				else
 				{
