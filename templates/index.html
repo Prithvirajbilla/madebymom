@@ -15,26 +15,24 @@
 			   </div>
 			   	<div class="card-heading image">
 			      <img src="{{food.served_by.picture.url}}" alt=""/>
-			      <div class="card-heading-header">
+			      <div class="card-heading-header clear-fix">
 			         <h3>{{food.served_by.name}}</h3>
 			         <span>{{food.hash_tags}}</span>
+     			      <img  style="display:inline-block;width: 25px; height: 25px;margin-top:5px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;" class="pull-right img-resposnive item_image"  alt="64x64"  src="{% static 'img/veg.jpg' %}">
+
 			      </div>
-			      <img  style="display:inline-block;width: 25px; height: 25px;margin-top:5px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;" class="pull-right img-resposnive item_image"  alt="64x64"  src="{% static 'img/veg.jpg' %}">
 			   </div>
 
-			   <div class="card-actions">
+			   <div class="card-actions clearfix">
 			   	  <button class="btn item_price" > Rs. {{food.price}} </button>
 			      <a data-toggle="collapse" data-target="#c{{ forloop.counter0 }}-comments"  class="btn btn-primary" >View details &raquo;</a>
 
 
-				<div class="input-group pull-right" style="width:120px">
+				<div class="input-group pull-right" style="width:80px">
 			          <span class="input-group-btn">
 			              <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
 			                <i class="glyphicon glyphicon-minus"></i>
 			              </button>
-			          </span>
-			          <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
-			          <span class="input-group-btn">
 			              <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
 			                  <i class="glyphicon glyphicon-plus"></i>
 			              </button>
