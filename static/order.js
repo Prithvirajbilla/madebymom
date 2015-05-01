@@ -1,5 +1,5 @@
 var items_count = 0;
-
+var cart_basket = {};
 
 $(".btn-number").click(
 		function  () {
@@ -41,6 +41,8 @@ $(".btn-number").click(
 					$(id+ " .rating-box").text(quant);
 					$(id+ " .btn-number").data("number",quant);
 				}
+				cart_basket[id] =quant;
+				$.cookie("cart_basket",JSON.stringify(cart_basket));
 			}
 			else if(type_of_button == "plus")
 			{
@@ -51,7 +53,7 @@ $(".btn-number").click(
 					$("#cart_count").show();
 					$("#cart_count").text(items_count);
 				}
-
+				
 				quant+=1;
 				if(quant > 10)
 				{
@@ -64,6 +66,8 @@ $(".btn-number").click(
 					$(id+ " .rating-box").text(quant);
 					$(id+ " .btn-number").data("number",quant);
 				}
+				cart_basket[id] = quant;
+				$.cookie("cart_basket",JSON.stringify(cart_basket));
 			}
 		}
 
