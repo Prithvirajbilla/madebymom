@@ -24,7 +24,7 @@ $(".btn-number").click(
 				quant+=1;
 				if(quant > 10)
 				{
-					//
+					$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
 				}
 				else
 				{
