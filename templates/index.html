@@ -13,14 +13,14 @@
 			            <h3 class="food-name item_name">{{food.name}}</h3>
 			        </div>
 			   </div>
-			   	<div class="card-heading image">
+			   	<div class="card-heading image clearfix">
 			      <img src="{{food.served_by.picture.url}}" alt=""/>
-			      <div class="card-heading-header clear-fix">
+			      <div class="card-heading-header">
 			         <h3>{{food.served_by.name}}</h3>
 			         <span>{{food.hash_tags}}</span>
-     			      <img  style="display:inline-block;width: 25px; height: 25px;margin-top:5px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;" class="pull-right img-resposnive item_image"  alt="64x64"  src="{% static 'img/veg.jpg' %}">
 
 			      </div>
+  			      <img  style="display:inline-block;width: 25px; height: 25px;margin-top:5px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;" class="pull-right img-resposnive item_image"  alt="64x64"  src="{% static 'img/veg.jpg' %}">
 			   </div>
 
 			   <div class="card-actions clearfix">
