@@ -234,3 +234,4 @@ textarea {
 
 }
 
+.collapsing { transition: height 0.6s; }
