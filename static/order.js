@@ -1,4 +1,5 @@
 var items_count = 0;
+var cart_basket = {};
 $( document ).ready(function() {
 	if(typeof $.cookie('cart_basket') === 'undefined')
 	{
@@ -7,14 +8,16 @@ $( document ).ready(function() {
 	}
 	else
 	{
-		var cart_basket = JSON.parse($.cookie('cart_basket'));
+		cart_basket = JSON.parse($.cookie('cart_basket'));
+		console.log(cart_basket);
 		items_count = Object.keys(cart_basket).length;
 		for (var key in cart_basket)
 		{
 			var id = key;
 			var number =  cart_basket[key];
 			if(number > 0)
-			{		
+			{
+				cart_basket[id] = number;
 				$(id+"  .rating-box").show();
 				$(id+ " .rating-box").text(number);
 				$(id+" .btn-number").data("number",number);
@@ -34,7 +37,6 @@ $( document ).ready(function() {
 })
 
 
-var cart_basket = {};
 
 $(".btn-number").click(
 		function  () {
