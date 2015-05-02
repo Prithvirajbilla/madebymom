@@ -33,7 +33,7 @@
                         </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="number" class="form-control quantity" value="{{dish.order_quantity}}">
+                        <input type="number" class="form-control quantity" min="1" max="10" data-id="{{dish.food.id}}" value="{{dish.order_quantity}}">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong class="price">&#8377; {{dish.food.price}}</strong></td>
 
