@@ -39,7 +39,7 @@
 
                         <td class="col-sm-1 col-md-1 text-center"><strong class="total_price">&#8377; {% widthratio dish.order_quantity 1 dish.food.price %}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
+                        <button type="button" class="btn btn-danger remove" data-id="{{dish.food.id}}">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
@@ -77,6 +77,15 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class=" alert alert-success" id="empty-cart" style="text-align:center;display:none">
+                <h3> Your Cart seems Empty </h3>
+                <a class="btn btn-warning" href="/"> 
+                 <span class="glyphicon glyphicon-shopping-cart"></span>    Click here to Order
+                </a>
+
+            </div>
+
             {% else %}
 
             <div class=" alert alert-success" style="text-align:center">
@@ -93,5 +102,5 @@
 
 {% block js %}
 
-<script type="text/javascript" href="{% static 'cart.js' %}"></script>
+<script type="text/javascript" src="{% static 'cart.js' %}"></script>
 {% endblock %}
