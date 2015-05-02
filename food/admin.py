@@ -11,3 +11,5 @@ class FoodAdmin(admin.ModelAdmin):
         js = ('ckeditor/ckeditor.js',)
 
 admin.site.register(Food,FoodAdmin)
+
+admin.site.register(Coupon)

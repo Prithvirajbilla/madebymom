@@ -76,3 +76,14 @@ class Food(models.Model):
 			return True
 		else:
 			return False
+
+
+
+class Coupon(models.Model):
+	coupon_code = models.CharField(max_length=10);
+	discount = models.IntegerField()
+	max_discount = models.IntegerField()
+	minimum_order = models.IntegerField()
+
+
+	
