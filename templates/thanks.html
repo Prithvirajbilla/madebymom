@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="row" style="margin-top:60px;background-color:white">
+            <table class="table table-hover " style="margin-top:10px">
+                <thead>
+                    <tr>
+                        <th>Dish</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dish in items %}
+                    <tr id="{{dish.food.id}}-table">
+                        <td class="col-sm-8 col-md-6">
+                        <div class="media">
+                            <div class="media-left">
+                                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{dish.food.picture.url}}" style="width: 72px; height: 72px;"> </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{dish.food.name}}</h4>
+                                <h5 class="media-heading"> by <a href="#">{{dish.food.served_by.name}}</a></h5>
+                            </div>
+                        </div>
+                        </td>
+                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                        {{dish.quantity}}
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong class="price">&#8377; {{dish.food.price}}</strong></td>
+
+                        <td class="col-sm-1 col-md-1 text-center"><strong class="total_price">&#8377; {% widthratio dish.quantity 1 dish.food.price %}</strong></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong id="cart-price"></strong></h3></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(
+		function()
+		{
+			var cookies = $.cookie();
+			for(var cookie in cookies) {
+				$.removeCookie(cookie);
+			}
+			$(".cart_count").hide();
+		});
+</script>
+
+{% endblock %}

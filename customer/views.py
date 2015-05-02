@@ -6,7 +6,7 @@ from food.models import Food
 import json
 import datetime
 import urllib 
-
+from users.models import *
 
 
 def check_order(request,pid,quant):
@@ -84,22 +84,63 @@ def checkout(request):
 	if "cart_basket" in request.COOKIES:
 		cookie = urllib.unquote(request.COOKIES.get("cart_basket")).decode('utf8')
 		cart_basket = json.loads(cookie)
+		print cart_basket
 		foods = []
 		for key in cart_basket:
 			pid = key[1:]
-			print pid,cart_basket[key]
-
 			dish = {"food":Food.objects.get(id=pid)}
 			if cart_basket[key] == 0:
 				continue
 			if cart_basket[key] <= 10  and cart_basket >= 1:
 				dish["order_quantity"] = cart_basket[key]
 				if  cart_basket[key] <= dish["food"].quantity:
+					print dish
 					dish["in_stock"] = True
+					foods.append(dish);
 				else:
 					cart_basket[key] = dish["food"].quantity
-					dish["in_stock"] = False
-				foods.append(dish)
+					request.session["expired"] =True
+					return HttpResponseRedirect("/cart")
 			else:
 				raise Http404
-	return render(request,template)
+
+		if request.method == "POST":
+			name = request.POST["name"].strip()
+			email = request.POST["email"].strip()
+			mobile = request.POST["mobile"].strip()
+			address_1 = request.POST["address_1"].strip()
+			address_2 = request.POST["address_2"].strip()
+			area = request.POST["area"].strip()
+
+
+			if name != "" and email != "" and mobile != "" and address_1 != "" and area != "":
+				order = Order(name=name,email=email,mobile=mobile,address_line_1=address_1,
+					address_line_2=address_2,area=area)
+				order.save()
+				cart = Cart(order=order,discount=0)
+				cart.save()
+				print len(foods)
+				print foods
+				for dish in foods:
+					item = Item(cart=cart,food=dish["food"],quantity=dish["order_quantity"])
+					dish["food"].quantity-=dish["order_quantity"]
+					dish["food"].save()
+					item.save()
+					print item.food.name
+
+				return HttpResponseRedirect("/thanks/"+str(cart.pk));
+			else:
+				request.session["wrong"] = True
+
+				return HttpResponseRedirect("/cart/")
+
+	return HttpResponseRedirect("/cart/")
+
+
+
+def thanks(request,pid):
+	template = "thanks.html"
+	cart = Cart.objects.get(pk=pid)
+	items = Item.objects.filter(cart=cart)
+	print items
+	return render(request,template,{"cart":cart,"items":items})

@@ -48,45 +48,60 @@ $(".quantity").on("input",
 	{
 		var id = $(this).data("id");
 		var txt = $(this).val();
-		var url = "/check_order/"+$(this).data("id")+"/"+txt;
-		$.get(url,function(data){
+		console.log(txt);
+		if(txt <= 10)
+		{
+			var url = "/check_order/"+$(this).data("id")+"/"+txt;
+			$.get(url,function(data){
 
-			if(data["result"])
-			{
-				if(txt >=  10)
+				if(data["result"])
 				{
-					txt = 10;
-					//changing the price
-					$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
-					$("#"+id+"-table .total_price").val(txt);
-					var cart_basket = JSON.parse($.cookie("cart_basket"));
-					cart_basket["#"+id] = txt;
-					$.cookie("cart_basket",JSON.stringify(cart_basket));
+					if(txt >=  10)
+					{
+						txt = 10;
+						//changing the price
+						$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
+						$("#"+id+"-table .total_price").val(txt);
+						var cart_basket = JSON.parse($.cookie("cart_basket"));
+						cart_basket["#"+id] = txt;
+						$.cookie("cart_basket",JSON.stringify(cart_basket));
+					}
+					var price = $("#"+id+"-table .price").text();
+					price = parseInt(price.substring(2));
+					txt = $("#"+id+"-table .quantity").val();
+					$("#"+id+"-table .total_price").text("₹ "+price*txt);
+
+					find_total();
 				}
-				var price = $("#"+id+"-table .price").text();
-				price = parseInt(price.substring(2));
-				txt = $("#"+id+"-table .quantity").val();
-				$("#"+id+"-table .total_price").text("₹ "+price*txt);
+				else
+				{
+					var txt = parseInt(data["quantity"]);
+					$("#"+id+"-table .quantity").val(txt);
+					$.notify("Only "+data["quantity"]+" left in the store", "warn");
 
-				find_total();
-			}
-			else
-			{
-				var txt = parseInt(data["quantity"]);
-				$("#"+id+"-table .quantity").val(txt);
-				$.notify("Only "+data["quantity"]+" left in the store", "warn");
+					var price = $("#"+id+"-table .price").text();
+					price = parseInt(price.substring(2));
+					$("#"+id+"-table .total_price").text("₹ "+price*data["quantity"]);
 
-				var price = $("#"+id+"-table .price").text();
-				price = parseInt(price.substring(2));
-				$("#"+id+"-table .total_price").text("₹ "+price*data["quantity"]);
+					find_total();
 
-				find_total();
-
-			}
+				}
 
 
 
-		},"json");
+			},"json");
+		}
+		else
+		{
+			console.log("text");
+			txt = 10;
+			//changing the price
+			$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
+			$("#"+id+"-table .total_price").val(txt);
+			var cart_basket = JSON.parse($.cookie("cart_basket"));
+			cart_basket["#"+id] = txt;
+			$.cookie("cart_basket",JSON.stringify(cart_basket));
+		}
 
 	}
 );
