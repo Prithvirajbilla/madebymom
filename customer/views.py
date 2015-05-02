@@ -12,4 +12,9 @@ def home(request):
 	foods = Food.objects.all()
 	return render(request,template,{"foods":foods})
 
- 
+
+def cart(request):
+	template = "cart.html"
+	# foods = Food.objects.filter(day=datetime.date.today())
+	foods = Food.objects.all()
+	return render(request,template,{"foods":foods})

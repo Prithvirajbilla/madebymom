@@ -8,8 +8,8 @@ $(".btn-number").click(
 			var id = "#"+$(this).data("id");
 			if(type_of_button == "minus")
 			{
-				if(quant == 10)
-					$(id+" .btn-number[data-type='plus']").removeAttr("disabled");
+				
+				$(id+" .btn-number[data-type='plus']").removeAttr("disabled");
 
 				quant -= 1;
 				if(quant == 0)
@@ -53,12 +53,13 @@ $(".btn-number").click(
 					$("#cart_count").show();
 					$("#cart_count").text(items_count);
 				}
-				
+
 				quant+=1;
 				if(quant > 10)
 				{
 					$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
 					$(this).attr("disabled",true);
+					quant-=1;
 				}
 				else
 				{
