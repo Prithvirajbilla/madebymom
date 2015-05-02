@@ -12,9 +12,16 @@
 	    <div class="col-md-4 col-lg-4 col-sm-6 col-border-bs">
 		    <div class="card" id="{{food.id}}">
 			   <div class="card-media">
-			         <img  src="{{food.picture.url}}" alt="media"/>
+			         <img  src="{{food.picture.url}}" alt="media"
+			         {% if food.quantity == 0 %}
+			         style="filter: blur(5px);"
+			         {% endif %}
+			         />
 			         <div class="rr"></div>
 			         <div class="rating-box" style="display:none">0</div>
+			         <div class="soldout" {% if food.quantity != 0 %}
+			         style="display:none;" {% endif %} 
+			         >sold out</div>
 			        <div class="hd-text">
 			            <h3 class="food-name item_name">{{food.name}}</h3>
 			        </div>
@@ -41,10 +48,12 @@
 
 				<div class="input-group pull-right" style="width:80px">
 			          <span class="input-group-btn">
-			              <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-number="0" data-id="{{food.id}}">
+			              <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-number="0" data-id="{{food.id}}" {% if food.quantity == 0 %} disabled="true"
+			              {% endif %}>
 			                <i class="glyphicon glyphicon-minus"></i>
 			              </button>
-			              <button type="button" class="btn btn-success btn-number" data-type="plus" data-number="0" data-id="{{food.id}}">
+			              <button type="button" class="btn btn-success btn-number" data-type="plus" data-number="0" data-id="{{food.id}}" {% if food.quantity == 0 %} disabled="true"
+			              {% endif %}>
 			                  <i class="glyphicon glyphicon-plus"></i>
 			              </button>
 			          </span>

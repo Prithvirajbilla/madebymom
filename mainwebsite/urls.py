@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$','customer.views.home'),
     url(r'^cart$','customer.views.cart',name='cart'),
+    url(r'^check_order/(?P<pid>\d+)/(?P<quant>\d+)$','customer.views.check_order',name='check_order'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
 

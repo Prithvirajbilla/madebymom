@@ -84,6 +84,3 @@ class Coupon(models.Model):
 	discount = models.IntegerField()
 	max_discount = models.IntegerField()
 	minimum_order = models.IntegerField()
-
-
-	

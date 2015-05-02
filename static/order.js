@@ -103,22 +103,34 @@ $(".btn-number").click(
 					$("#cart_count").show();
 					$("#cart_count").text(items_count);
 				}
+				var pay = quant+1;
+				var url = "/check_order/"+$(this).data("id")+"/"+pay;
+				$.get(url,function(data){
+					if(data["result"])
+					{
+						quant+=1;
+						if(quant > 10)
+						{
+							$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
+							$(this).attr("disabled",true);
+							quant-=1;
+						}
+						else
+						{
+							$(id+ " .rating-box").show();
+							$(id+ " .rating-box").text(quant);
+							$(id+ " .btn-number").data("number",quant);
+						}
 
-				quant+=1;
-				if(quant > 10)
-				{
-					$.notify("You cannot order more than 10 items of the same type!.To Bulk order, Contact us", "warn");
-					$(this).attr("disabled",true);
-					quant-=1;
-				}
-				else
-				{
-					$(id+ " .rating-box").show();
-					$(id+ " .rating-box").text(quant);
-					$(id+ " .btn-number").data("number",quant);
-				}
-				cart_basket[id] = quant;
-				$.cookie("cart_basket",JSON.stringify(cart_basket));
+						cart_basket[id] = quant;
+						$.cookie("cart_basket",JSON.stringify(cart_basket));
+					}
+					else
+					{
+						$.notify("only "+quant+" left in the store", "warn");
+
+					}
+				},"json");
 			}
 		}
 

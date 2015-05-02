@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from django.db import models
-from food.models import Food
+from food.models import Food,Coupon
 
 
 class FoodAdmin(admin.ModelAdmin):
