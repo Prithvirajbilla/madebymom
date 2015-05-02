@@ -30,6 +30,7 @@ def home(request):
 
 	if "cart_basket" in request.COOKIES:
 		cookie = urllib.unquote(request.COOKIES.get("cart_basket")).decode('utf8')
+		print cookie
 		cart_basket = json.loads(cookie)
 		for key in cart_basket:
 			pid = key[1:]
@@ -42,7 +43,7 @@ def home(request):
 					print dish.quantity
 					cart_basket[key] = dish.quantity
 
-		response.set_cookie("cart_basket",json.dumps(cart_basket))
+		response.set_cookie("cart_basket",urllib.quote(json.dumps(cart_basket)))
 
 	return response
 
