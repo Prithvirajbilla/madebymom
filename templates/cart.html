@@ -19,24 +19,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for food in foods %}
+                    {% for dish in foods %}
                     <tr>
                         <td class="col-sm-8 col-md-6">
                         <div class="media">
                             <div class="media-left">
-                                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{food.picture.url}}" style="width: 72px; height: 72px;"> </a>
+                                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{dish.food.picture.url}}" style="width: 72px; height: 72px;"> </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">{{food.name}}</h4>
-                                <h5 class="media-heading"> by <a href="#">{{food.served_by.name}}</a></h5>
+                                <h4 class="media-heading">{{dish.food.name}}</h4>
+                                <h5 class="media-heading"> by <a href="#">{{dish.food.served_by.name}}</a></h5>
                             </div>
                         </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
+                        <input type="email" class="form-control" id="exampleInputEmail1" value="{{dish.order_quantity}}">
                         </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>&#8377; {{dish.food.price}}</strong></td>
+
+                        <td class="col-sm-1 col-md-1 text-center"><strong>&#8377; {% widthratio dish.order_quantity 1 dish.food.price %}</strong></td>
                         <td class="col-sm-1 col-md-1">
                         <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove

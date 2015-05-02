@@ -9,8 +9,6 @@ $( document ).ready(function() {
 	{
 		var cart_basket = JSON.parse($.cookie('cart_basket'));
 		items_count = Object.keys(cart_basket).length;
-		$("#cart_count").text(items_count);
-		$("#cart_count").show();
 		for (var key in cart_basket)
 		{
 			var id = key;
@@ -20,7 +18,14 @@ $( document ).ready(function() {
 				$(id+"  .rating-box").show();
 				$(id+ " .rating-box").text(number);
 				$(id+" .btn-number").data("number",number);
-			}		
+			}
+			else
+				items_count-=1;
+			if(items_count > 0)
+			{
+				$("#cart_count").text(items_count);
+				$("#cart_count").show();
+			}
 		}
 
 	}

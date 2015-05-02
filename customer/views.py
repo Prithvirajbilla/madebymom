@@ -24,9 +24,16 @@ def cart(request):
 			pid = key[1:]
 			print pid,cart_basket[key]
 
-			dish = Food.objects.get(id=pid)
-			if (cart_basket[key] > 10 or cart_basket[key] < dish.quantity) and cart_basket >= 1:
-				foods.append(Food.objects.get(id=pid))
+			dish = {"food":Food.objects.get(id=pid)}
+			if cart_basket[key] == 0:
+				continue
+			if cart_basket[key] <= 10  and cart_basket >= 1:
+				dish["order_quantity"] = cart_basket[key]
+				if  cart_basket[key] <= dish["food"].quantity:
+					dish["in_stock"] = True
+				else:
+					dish["in_stock"] = False
+				foods.append(dish)
 			else:
 				raise Http404
 		return render(request,template,{"foods":foods})
