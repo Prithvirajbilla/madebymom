@@ -71,19 +71,23 @@
                             <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                         </a></td>
                         <td>
-                        <button type="button" class="btn btn-success">
+                        <a type="button" class="btn btn-success place_order" >
                             Place Order<span class="glyphicon glyphicon-play"></span>
-                        </button></td>
+                        </a></td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class=" alert alert-success" id="empty-cart" style="text-align:center;display:none">
+            <div class="alert alert-success" id="empty-cart" style="text-align:center;display:none">
                 <h3> Your Cart seems Empty </h3>
                 <a class="btn btn-warning" href="/"> 
                  <span class="glyphicon glyphicon-shopping-cart"></span>    Click here to Order
                 </a>
 
+            </div>
+
+            <div class="checkout" style="display:none">
+                {% include 'checkout.html' %}
             </div>
 
             {% else %}
@@ -97,6 +101,7 @@
             </div>
             {% endif %}
         </div>
+
     </div>
 {% endblock %}
 

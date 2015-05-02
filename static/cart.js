@@ -90,3 +90,10 @@ $(".quantity").on("input",
 
 	}
 );
+
+$(".place_order").click(function()
+{
+	$(this).attr("disabled",true);
+	$(".checkout").show();
+	$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+});
