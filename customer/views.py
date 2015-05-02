@@ -31,7 +31,6 @@ def home(request):
 		for key in cart_basket:
 			pid = key[1:]
 			if cart_basket[key] == 0:
-				del cart_basket[key]
 				continue
 			dish = Food.objects.get(pk=pid)
 			print cart_basket[key],dish.quantity
