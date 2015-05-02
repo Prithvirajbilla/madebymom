@@ -1,4 +1,34 @@
 var items_count = 0;
+$( document ).ready(function() {
+	if(typeof $.cookie('cart_basket') === 'undefined')
+	{
+		//no cookie
+
+	}
+	else
+	{
+		var cart_basket = JSON.parse($.cookie('cart_basket'));
+		items_count = Object.keys(cart_basket).length;
+		$("#cart_count").text(items_count);
+		$("#cart_count").show();
+		for (var key in cart_basket)
+		{
+			var id = key;
+			var number =  cart_basket[key];
+			if(number > 0)
+			{		
+				$(id+"  .rating-box").show();
+				$(id+ " .rating-box").text(number);
+				$(id+" .btn-number").data("number",number);
+			}		
+		}
+
+	}
+
+
+})
+
+
 var cart_basket = {};
 
 $(".btn-number").click(
