@@ -24,16 +24,26 @@ $( document ).ready(function() {
 			}
 			else
 				items_count-=1;
-			if(items_count > 0)
-			{
-				$("#cart_count").text(items_count);
-				$("#cart_count").show();
-			}
 		}
+		if(items_count > 0)
+		{
+			$("#cart_count").text(items_count);
+			$("#cart_count").show();
+		}
+
 
 	}
 
-
+	var total_price = 0;
+	console.log(total_price);
+	$(".total_price").each(
+		function()
+		{
+			var txt = $(this).text();
+			total_price+= parseInt(txt.substring(2));
+		}
+	);
+	$("#cart-price").text("₹ "+total_price);
 })
 
 
@@ -78,7 +88,10 @@ $(".btn-number").click(
 					$(id+ " .rating-box").text(quant);
 					$(id+ " .btn-number").data("number",quant);
 				}
-				cart_basket[id] =quant;
+				if(quant != 0)
+					cart_basket[id] =quant;
+				else
+					delete cart_basket[id];
 				$.cookie("cart_basket",JSON.stringify(cart_basket));
 			}
 			else if(type_of_button == "plus")

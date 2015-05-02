@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     {% for dish in foods %}
-                    <tr>
+                    <tr id="{{dish.food.id}}-table">
                         <td class="col-sm-8 col-md-6">
                         <div class="media">
                             <div class="media-left">
@@ -33,11 +33,11 @@
                         </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="{{dish.order_quantity}}">
+                        <input type="number" class="form-control quantity" value="{{dish.order_quantity}}">
                         </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>&#8377; {{dish.food.price}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong class="price">&#8377; {{dish.food.price}}</strong></td>
 
-                        <td class="col-sm-1 col-md-1 text-center"><strong>&#8377; {% widthratio dish.order_quantity 1 dish.food.price %}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong class="total_price">&#8377; {% widthratio dish.order_quantity 1 dish.food.price %}</strong></td>
                         <td class="col-sm-1 col-md-1">
                         <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -49,13 +49,13 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
+                        <td class="text-right"><h3><strong id="cart-price"></strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td><h5>Coupon Code</h5></td>
-                        <td><input type="email" class="form-control" id="exampleInputEmail1" value="{{dish.order_quantity}}"></td>
+                        <td><input type="email" class="form-control"  value="{{dish.order_quantity}}"></td>
                         <td class="text-right">
                         <button type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Apply Coupon
@@ -79,8 +79,19 @@
             </table>
             {% else %}
 
+            <div class=" alert alert-success" style="text-align:center">
+                <h3> Your Cart seems Empty </h3>
+                <a class="btn btn-warning" href="/"> 
+                 <span class="glyphicon glyphicon-shopping-cart"></span>    Click here to Order
+                </a>
 
+            </div>
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" href="{% static 'cart.js' %}"></script>
 {% endblock %}
