@@ -25,6 +25,9 @@ def check_order(request,pid,quant):
 def home(request):
 	template = "index.html"
 	# foods = Food.objects.filter(day=datetime.date.today())
+	foods = Food.objects.all()
+	response = render(request,template,{"foods":foods})
+
 	if "cart_basket" in request.COOKIES:
 		cookie = urllib.unquote(request.COOKIES.get("cart_basket")).decode('utf8')
 		cart_basket = json.loads(cookie)
@@ -39,10 +42,8 @@ def home(request):
 					print dish.quantity
 					cart_basket[key] = dish.quantity
 
-	foods = Food.objects.all()
-	response = render(request,template,{"foods":foods})
-	print cart_basket
-	response.set_cookie("cart_basket",json.dumps(cart_basket))
+		response.set_cookie("cart_basket",json.dumps(cart_basket))
+
 	return response
 
 
