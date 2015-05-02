@@ -67,10 +67,13 @@ def cart(request):
 				if  cart_basket[key] <= dish["food"].quantity:
 					dish["in_stock"] = True
 				else:
+					cart_basket[key] = dish["food"].quantity
 					dish["in_stock"] = False
 				foods.append(dish)
 			else:
 				raise Http404
-		return render(request,template,{"foods":foods})
+		response = render(request,template,{"foods":foods})
+		response.set_cookie("cart_basket",urllib.quote(json.dumps(cart_basket)))
+		return response
 	else:
 		return render(request,template,{"foods":None})
