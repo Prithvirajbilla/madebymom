@@ -18,6 +18,7 @@ def check_order(request,pid,quant):
 			data["result"] = True
 		else:
 			data["result"] = False
+			data["quantity"] = int(food.quantity)
 	except Exception, e:
 		data["result"] = False
 	return HttpResponse(json.dumps(data), content_type="application/json")
